@@ -1,0 +1,35 @@
+中期检查
+
+
+
+
+
+
+
+DBL:代码中的Darknetconv2d_BN_Leaky，是yolo_v3的基本组件。就是卷积+BN+Leaky relu。
+resn：n代表数字，有res1，res2, … ,res8等等，表示这个res_block里含有多少个res_unit。不懂resnet请戳这儿
+concat：张量拼接。将darknet中间层和后面的某一层的上采样进行拼接。拼接的操作和残差层add的操作是不一样的，拼接会扩充张量的维度，而add只是直接相加不会导致张量维度的改变。
+
+Yolo_v3使用了darknet-53的前面的52层（没有全连接层），yolo_v3这个网络是一个全卷积网络，大量使用残差的跳层连接，并且为了降低池化带来的梯度负面效果，作者直接摒弃了POOLing，用conv的stride来实现降采样。在这个网络结构中，使用的是步长为2的卷积来进行降采样。
+为了加强算法对小目标检测的精确度，YOLO v3中采用类似FPN的upsample和融合做法（最后融合了3个scale，其他两个scale的大小分别是26×26和52×52），在多个scale的feature map上做检测。
+
+每个bounding box都会预测三个东西：（1）每个框的位置（4个值，中心坐标tx和ty，，框的高度bh和宽度bw），（2）一个objectness prediction ，（3）N个类别，coco数据集80类，voc20类。
+
+
+
+
+
+
+
+
+
+
+
+Faster R-CNN的训练，是在已经训练好的model（如VGG_CNN_M_1024，VGG，ZF）的基础上继续进行训练。实际中训练过程分为6个步骤：
+
+在已经训练好的model上，训练RPN网络，对应stage1_rpn_train.pt
+	利用步骤1中训练好的RPN网络，收集proposals，对应rpn_test.pt
+	第一次训练Fast RCNN网络，对应stage1_fast_rcnn_train.pt
+	第二训练RPN网络，对应stage2_rpn_train.pt
+	再次利用步骤4中训练好的RPN网络，收集proposals，对应rpn_test.pt
+	第二次训练Fast RCNN网络，对应stage2_fast_rcnn_train.pt
