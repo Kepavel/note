@@ -1,4 +1,4 @@
-git add .
+git add .（一定不要忘掉add和.之间的空格）
 
 git  commit -m "update"
 
