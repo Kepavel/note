@@ -14,10 +14,4 @@ DOM是javascript操作网页的接口，全称是“文档对象模型”（Docu
 
 DOM树：层级结构，是元素，元素之间的关系
 
-
-
-
-
-
-
 elements面板：用于对页面HTML和CSS的检查以及可视化编辑
