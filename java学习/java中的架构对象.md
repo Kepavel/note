@@ -15,10 +15,11 @@ java中的架构对象：
 <font color='cornflowerblue'>包括了：</font>
 
 1. <font color='cornflowerblue'>DAO工厂类</font>
-
 2. <font color='cornflowerblue'>DAO接口</font>
-
 3. <font color='cornflowerblue'>实现DAO接口的具体类</font>
-
 4. <font color='cornflowerblue'>数据传递对象</font>
+
+Java web中的mapper是对象持久化映射层
+
+会继承ibatis或者mybatis service的业务逻辑处理层，
 
