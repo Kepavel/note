@@ -22,7 +22,7 @@ Java 中的拆箱与装箱
 
 integer、short、byte、char、long实现valueof()的方式是类似的
 
-double、float实现的valueof()是类似的
+double、float实现的valueof()是类似的，没有常量池技术
 
 <font color='cornflowerblue'>装箱过程是调用包装器的valueof方法实现，拆箱过程是调用包装器的XXXvalue方法实现的</font>
 
@@ -31,4 +31,12 @@ double、float实现的valueof()是类似的
 
 
 对于包装器的类型<font color='cyan'>equals方法</font>不会进行类型转换
+
+装箱的过程是：
+
+integer i1=Integer.valueOf();
+
+创建新对象：
+
+integer i1=new integer();
 
